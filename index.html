@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>
+HTML5 Geolocation
+</title>
+
+<!--  jquery -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+
+<!-- demo scripts -->
+<script src="//maps.googleapis.com/maps/api/js?sensor=true"></script>
+<link rel="stylesheet" href="css/normalize.css">
+<link rel="stylesheet" href="css/styles.css">
+
+<script>
+// create google map
+function GoogleMap(position) {
+	var location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+	var map = new google.maps.Map(document.getElementById('map'), {
+						zoom: 10,
+						disableDefaultUI: true,	
+						mapTypeId: google.maps.MapTypeId.ROADMAP,
+					});
+
+	var marker = new google.maps.Marker({
+						map: map,
+						position: location,
+						animation: google.maps.Animation.DROP,
+						title: "This is your location"
+					});
+
+	map.setCenter(location);
+}
+
+// show error if location can't be found
+function showError() {
+	alert("Location can't be found");
+}
+
+//execute geolocation
+if (navigator.geolocation) {
+	navigator.geolocation.getCurrentPosition(GoogleMap, showError);
+}
+else {
+	alert("Your browser does not support Geolocation.");
+}
+
+</script>
+
+<!-- nav script -->
+<script src="../nav/js/nav.js" type="text/javascript"></script>
+</head>
+
+<body>
+
+<!-- nav meta -->
+<div class="demo-meta">
+  <h1 class="demo-title">HTML5 Geolocation API</h1>
+  <p class="demo-desc">Deploying HTML5 Geolocation to show users location and coordinate. This map below is showing your location.</p>
+</div>
+
+<!-- demo content -->
+<div class="demo-wrapper">
+	<div id="map">
+		
+	</div>
+</div>
+
+</body>
+</html>
